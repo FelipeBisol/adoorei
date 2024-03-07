@@ -35,4 +35,22 @@ class SaleControllerTest extends TestCase
             ]
         ]);
     }
+
+    public function test_it_should_be_create_a_sale_with_the_exact_value(): void
+    {
+        //arrange
+        $products = Product::query()->whereIn('id', [1, 3])->get();
+        $request = [
+            'products' => $products->pluck('id')->toArray()
+        ];
+
+        $amount = array_sum($products->pluck('price')->toArray());
+
+        //act
+        $response = $this->post(route('create-sale', $request));
+
+        //assert
+        $response->assertSuccessful();
+        $this->assertEquals($amount, $response->json()['data']['amount']);
+    }
 }
