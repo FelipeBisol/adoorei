@@ -12,4 +12,9 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return Product::all();
     }
+
+    public function findById(int $id): Product
+    {
+        return Product::whereId($id)->first();
+    }
 }

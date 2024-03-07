@@ -1,6 +1,7 @@
 <?php
 
 use Core\Product\Http\Controllers\ProductController;
+use Core\Sale\Http\Controllers\SaleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(ProductController::class)->group(function (){
     Route::get('/products', 'index')->name('get-all-products');
+});
+
+Route::controller(SaleController::class)->group(function (){
+    Route::post('/sale', 'create')->name('create-sale');
 });
