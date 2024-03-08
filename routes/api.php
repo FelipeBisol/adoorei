@@ -26,4 +26,8 @@ Route::controller(ProductController::class)->group(function (){
 
 Route::controller(SaleController::class)->group(function (){
     Route::post('/sale', 'create')->name('create-sale');
+    Route::get('/sales', 'all')->name('get-all-sales');
+    Route::get('/sale/{id}', 'get')->name('get-sale');
+    Route::put('/sale/{id}/cancel', 'delete')->name('cancel-sale');
+    Route::post('/sale/{id}/add-product', 'addProduct')->name('add-product-sale');
 });

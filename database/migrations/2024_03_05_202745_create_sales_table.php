@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->integer('amount');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

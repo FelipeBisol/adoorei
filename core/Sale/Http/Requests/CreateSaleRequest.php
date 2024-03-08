@@ -14,6 +14,13 @@ class CreateSaleRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'products.*.exists' => 'Produto ID :input inválido!',
+        ];
+    }
+
     public function authorize(): bool
     {
         return true;

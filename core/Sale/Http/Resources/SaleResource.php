@@ -12,6 +12,7 @@ class SaleResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        $this->load('products');
         return [
             'sale_id' => $this->id,
             'amount' => $this->amount,

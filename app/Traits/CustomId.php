@@ -10,8 +10,16 @@ trait CustomId
     public static function setCustomIdStatic(Model $model): int
     {
         $year = Carbon::now()->year;
-        $lastModel = $model->newQuery()->latest()->get();
-        return $lastModel->isNotEmpty() ? $lastModel->first()->id + 1 : ($year * 100000) + 1;
+
+        $lastModel = $model::query();
+
+        if (method_exists($model, 'trashed')){
+            $lastModel = $model->withTrashed();
+        }
+
+        $lastModel = $lastModel->orderByDesc('id')->first();
+
+        return $lastModel ? $lastModel->id + 1 : ($year * 100000) + 1;
     }
 
     public function setCustomId(Model $model): int
